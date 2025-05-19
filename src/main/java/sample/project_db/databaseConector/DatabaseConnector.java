@@ -4,6 +4,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import sample.project_db.model.Customer;
+import sample.project_db.model.Product;
 
 public class DatabaseConnector {
 
@@ -38,6 +44,35 @@ public class DatabaseConnector {
             stmt.setString(2, customerpassword);
             ResultSet resultSet = stmt.executeQuery();
             return resultSet.next();
+        }
+    }
+    public static Customer getCustomerByCustomerusername(String customerusername) throws SQLException {
+        String sql = "SELECT * FROM customer WHERE customerusername =?";
+
+        try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, customerusername);
+            ResultSet resultSet = stmt.executeQuery();
+            if(resultSet.next()){
+                return new Customer(resultSet.getInt("customerid"), resultSet.getString("customerusername"), resultSet.getString("customerpassword"), resultSet.getString("question"), resultSet.getString("answer"), resultSet.getString("customername"), resultSet.getString("phonenumber"), resultSet.getString("email"), resultSet.getString("address"));
+            } else{
+                return  null;
+            }
+        }
+    }
+    public static List<Product> getAllProducts() throws SQLException {
+        String sql = "SELECT * FROM product";
+        List<Product> allProduct = new ArrayList<>();
+        try (Connection conn = connect();
+         Statement stmt = conn.createStatement();
+         ResultSet resultSet = stmt.executeQuery(sql)) {
+            while(resultSet.next()){
+                allProduct.add(new Product(
+                    resultSet.getString("name"),
+                    resultSet.getInt("quantity"),
+                    resultSet.getDouble("sellprice")
+                ));
+            } 
+            return allProduct;
         }
     }
 }

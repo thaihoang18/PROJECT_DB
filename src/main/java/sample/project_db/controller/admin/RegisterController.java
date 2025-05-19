@@ -1,4 +1,4 @@
-package sample.project_db;
+package sample.project_db.controller.admin;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sample.project_db.databaseConector.DatabaseConnector;
 
-public class RegisterApp extends Application {
+public class RegisterController extends Application {
     
 
     @Override

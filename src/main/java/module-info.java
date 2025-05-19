@@ -8,4 +8,7 @@ module sample.project_db {
     exports sample.project_db;
     exports sample.project_db.controller.admin;
 
+
+    requires java.sql;
+
 }

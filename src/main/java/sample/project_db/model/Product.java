@@ -126,6 +126,5 @@ public class Product {
         this.quantity=quantity;
         this.sellprice=sellprice;
     }
-    
 }
 

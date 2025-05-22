@@ -20,7 +20,7 @@ import sample.project_db.databaseConector.DatabaseConnector;
 import sample.project_db.model.Product;
 
 public class StoreController extends Application{
-     @Override
+    @Override
     public void start(Stage primaryStage) throws SQLException {
         // Tạo các trường nhập
         Label titleLabel = new Label("Store page");
@@ -55,8 +55,17 @@ public class StoreController extends Application{
             e.printStackTrace();
         }
         // Xử lý khi nhấn nút đăng ký
-       
-        // Tạo layout
+        searchButton.setOnAction(e -> {
+            String searchKey = searchStringField.getText();
+            try {
+                List<Product> searchProducts = DatabaseConnector.getProductsByName(searchKey);
+                ObservableList<Product> observableSearchProducts = FXCollections.observableArrayList(searchProducts);
+                tableView.setItems(observableSearchProducts);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                messageLabel.setText("False  !");
+            }
+        });
         VBox vbox = new VBox(10, titleLabel, searchStringField,  searchButton, messageLabel, tableView);
         vbox.setPadding(new Insets(20));
         Scene scene = new Scene(vbox, 1400, 700);

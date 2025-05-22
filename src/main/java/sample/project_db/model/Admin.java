@@ -2,14 +2,49 @@ package sample.project_db.model;
 
 
 public class Admin {
-    private int adminId;
-    private String username;
-    private String password;
-    private String question;
+    private Integer adminid;
+    private String adminusername;
+    private String adminpassword;
+    private String question;    
     private String answer;
-    private String name;
-    private String phoneNumber;
+    private String adminname;
+    private String phonenumber;
     private String email;
+
+    public Admin(Integer adminid, String adminname, String adminpassword, String adminusername, String answer, String email, String phonenumber, String question) {
+        this.adminid = adminid;
+        this.adminname = adminname;
+        this.adminpassword = adminpassword;
+        this.adminusername = adminusername;
+        this.answer = answer;
+        this.email = email;
+        this.phonenumber = phonenumber;
+        this.question = question;
+    }
+
+    public Integer getAdminid() {
+        return adminid;
+    }
+
+    public void setAdminid(Integer adminid) {
+        this.adminid = adminid;
+    }
+
+    public String getAdminusername() {
+        return adminusername;
+    }
+
+    public void setAdminusername(String adminusername) {
+        this.adminusername = adminusername;
+    }
+
+    public String getAdminpassword() {
+        return adminpassword;
+    }
+
+    public void setAdminpassword(String adminpassword) {
+        this.adminpassword = adminpassword;
+
 
     public Admin(String username, String password, String question, String answer, String name, String phoneNumber, String email, int adminId) {
         this.username = username;
@@ -65,23 +100,21 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+
+    public String getAdminname() {
+        return adminname;
     }
 
-    public String getQuestion() {
-        return question;
+    public void setAdminname(String adminname) {
+        this.adminname = adminname;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
 
     public String getName() {
         return name;
@@ -97,16 +130,4 @@ public class Admin {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-}
-
 

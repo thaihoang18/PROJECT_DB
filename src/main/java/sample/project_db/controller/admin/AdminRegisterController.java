@@ -10,26 +10,24 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sample.project_db.databaseConector.DatabaseConnector;
 
-public class RegisterController extends Application {
+public class AdminRegisterController extends Application {
     
 
     @Override
     public void start(Stage primaryStage) {
         // Tạo các trường nhập
-        Label titleLabel = new Label("Đăng ký tài khoản");
-        TextField customerusernameField = new TextField();
-        customerusernameField.setPromptText("Username");
-        TextField customernameField = new TextField();
-        customernameField.setPromptText("Name");
+        Label titleLabel = new Label("Admin register");
+        TextField adminusernameField = new TextField();
+        adminusernameField.setPromptText("Username");
+        TextField adminnameField = new TextField();
+        adminnameField.setPromptText("Name");
         TextField phonenumberField = new TextField();
         phonenumberField.setPromptText("Phonenumber");
         TextField emailField = new TextField();
         emailField.setPromptText("Email");
-        TextField addressField = new TextField();
-        addressField.setPromptText("Address");
 
-        PasswordField customerpaswordField = new PasswordField();
-        customerpaswordField.setPromptText("Password");
+        PasswordField adminpaswordField = new PasswordField();
+        adminpaswordField.setPromptText("Password");
 
         TextField questionField = new TextField();
         questionField.setPromptText("Question");
@@ -42,20 +40,19 @@ public class RegisterController extends Application {
 
         // Xử lý khi nhấn nút đăng ký
         registerButton.setOnAction(e -> {
-            String customerusername = customerusernameField.getText();
-            String customerpassword = customerpaswordField.getText();
+            String adminusername = adminusernameField.getText();
+            String adminpassword = adminpaswordField.getText();
             String question = answerField.getText();
             String answer = answerField.getText();
-            String customername = customernameField.getText();
+            String adminname = adminnameField.getText();
             String phonenumber = phonenumberField.getText();
             String email = emailField.getText();
-            String address = addressField.getText();
 
-            if (customerusername.isEmpty() || customerpassword.isEmpty() || answer.isEmpty()|| question.isEmpty()) {
+            if (adminusername.isEmpty() || adminpassword.isEmpty() || answer.isEmpty()|| question.isEmpty()|| adminname.isEmpty()|| phonenumber.isEmpty()|| email.isEmpty()) {
                 messageLabel.setText("Vui lòng điền đầy đủ thông tin.");
             } else {
                 try {
-                    DatabaseConnector.registerUser(customerusername, customerpassword, question, answer, customername, phonenumber, email, address);
+                    DatabaseConnector.registerAdmin(adminusername, adminpassword, question, answer, adminname, phonenumber, email);
                     messageLabel.setText("Đăng ký thành công!");
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -65,7 +62,7 @@ public class RegisterController extends Application {
 });
 
         // Tạo layout
-        VBox vbox = new VBox(10, titleLabel, customerusernameField, customerpaswordField, questionField, answerField, customernameField, phonenumberField, emailField, addressField, registerButton, messageLabel);
+        VBox vbox = new VBox(10, titleLabel, adminusernameField, adminpaswordField, questionField, answerField, adminnameField, phonenumberField, emailField, registerButton, messageLabel);
         vbox.setPadding(new Insets(20));
 
         Scene scene = new Scene(vbox, 700, 700);

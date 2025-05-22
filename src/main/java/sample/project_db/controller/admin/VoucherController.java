@@ -6,7 +6,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import sample.project_db.model.*;
 
 import java.sql.Connection;
@@ -68,6 +67,8 @@ public class VoucherController {
     private PreparedStatement prepare;
     private ResultSet result;
     private Alert alert;
+
+
 
     public void showData() {
         ObservableList<Voucher> list = localVoucher.getAllVouchers();
@@ -230,7 +231,9 @@ public class VoucherController {
         voucher_label_ID.setText(String.valueOf(vc.getVoucher_id()));
     }
 
+    @FXML
     public void initialize() {
+        VoucherList.initialize();
         showData();
     }
 }

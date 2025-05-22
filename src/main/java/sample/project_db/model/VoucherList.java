@@ -21,16 +21,16 @@ public class VoucherList {
         connect.close();
     }
 
-    public static boolean updateVoucher(String code, int remaining, float discount, LocalDate duration, int voucher_id) {
+    public static boolean updateVoucher(String code, int remaining, float discount, LocalDate duration, int voucherid) {
         String updateQuery = "UPDATE voucher "
                 + "SET code=?, remaining=?, discount=?, duration=?"
-                + "WHERE voucher_id=?";
+                + "WHERE voucherid=?";
         try (PreparedStatement prepare = connect.prepareStatement(updateQuery)) {
             prepare.setString(1, code);
             prepare.setInt(2, remaining);
             prepare.setFloat(3, discount);
             prepare.setDate(4, java.sql.Date.valueOf(duration));
-            prepare.setInt(5, voucher_id);
+            prepare.setInt(5, voucherid);
 
             int rowsAffected = prepare.executeUpdate();
             return rowsAffected > 0;
@@ -66,7 +66,7 @@ public class VoucherList {
                         result.getInt("remaining"),
                         result.getFloat("discount"),
                         result.getDate("duration").toLocalDate(),
-                        result.getInt("voucher_id")
+                        result.getInt("voucherid")
                 ));
             }
         } catch (SQLException e) {
@@ -134,7 +134,7 @@ public class VoucherList {
                         result.getInt("remaining"),
                         result.getFloat("discount"),
                         result.getDate("duration").toLocalDate(),
-                        result.getInt("voucher_id")
+                        result.getInt("voucherid")
                 );
                 return voucher;
             }

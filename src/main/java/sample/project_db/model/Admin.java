@@ -1,6 +1,5 @@
 package sample.project_db.model;
 
-
 public class Admin {
     private Integer adminId;
     private String username;

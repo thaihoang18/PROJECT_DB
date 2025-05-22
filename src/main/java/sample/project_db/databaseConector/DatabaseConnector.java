@@ -92,7 +92,14 @@ public class DatabaseConnector {
             stmt.setString(1, adminusername);
             ResultSet resultSet = stmt.executeQuery();
             if(resultSet.next()){
-                return new Admin(resultSet.getInt("adminid"), resultSet.getString("adminusername"), resultSet.getString("adminpassword"), resultSet.getString("question"), resultSet.getString("answer"), resultSet.getString("adminname"), resultSet.getString("phonenumber"), resultSet.getString("email"));
+                return new Admin(resultSet.getInt("adminid"),
+                        resultSet.getString("adminusername"),
+                        resultSet.getString("adminpassword"),
+                        resultSet.getString("question"),
+                        resultSet.getString("answer"),
+                        resultSet.getString("adminname"),
+                        resultSet.getString("phonenumber"),
+                        resultSet.getString("email"));
             } else{
                 return  null;
             }

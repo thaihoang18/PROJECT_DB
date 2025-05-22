@@ -32,7 +32,7 @@ public class AdminList {
                         resultSet.getString("name"),
                         resultSet.getString("phonenumber"),
                         resultSet.getString("email"),
-                        resultSet.getInt("admin_id")
+                        resultSet.getInt("adminid")
                 );
                 return true;
             }

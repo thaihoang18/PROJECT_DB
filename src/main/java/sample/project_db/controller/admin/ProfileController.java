@@ -2,19 +2,19 @@ package sample.project_db.controller.admin;
 
 
 
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import sample.project_db.LaunchApplication;
-import sample.project_db.model.AdminList;
-import sample.project_db.model.database;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import static sample.project_db.LaunchApplication.localAdmin;
+import sample.project_db.model.AdminList;
 
 public class ProfileController {
 

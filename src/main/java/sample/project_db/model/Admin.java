@@ -1,5 +1,6 @@
 package sample.project_db.model;
 
+
 public class Admin {
     private Integer adminid;
     private String adminusername;
@@ -43,23 +44,62 @@ public class Admin {
 
     public void setAdminpassword(String adminpassword) {
         this.adminpassword = adminpassword;
-    }
 
-    public String getQuestion() {
-        return question;
-    }
 
-    public void setQuestion(String question) {
+    public Admin(String username, String password, String question, String answer, String name, String phoneNumber, String email, int adminId) {
+        this.username = username;
+        this.password = password;
         this.question = question;
+        this.answer = answer;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.adminId = adminId;
     }
 
-    public String getAnswer() {
-        return answer;
+    public Admin(String username, String password, String question, String answer, String name, String phoneNumber, String email) {
+        this.username = username;
+        this.password = password;
+        this.question = question;
+        this.answer = answer;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
-    public void setAnswer(String answer) {
+    public Admin(String username, String password, String question, String answer) {
+        this.username = username;
+        this.password = password;
+        this.question = question;
         this.answer = answer;
     }
+
+    public Admin() {
+
+    }
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
 
     public String getAdminname() {
         return adminname;
@@ -75,16 +115,19 @@ public class Admin {
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
+
+    public String getName() {
+        return name;
     }
 
-    public String getEmail() {
-        return email;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
 
-
-}

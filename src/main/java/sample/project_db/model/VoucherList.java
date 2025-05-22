@@ -22,9 +22,9 @@ public class VoucherList {
     }
 
     public static boolean updateVoucher(String code, int remaining, float discount, LocalDate duration, int voucherid) {
-        String updateQuery = "UPDATE voucher "
-                + "SET code=?, remaining=?, discount=?, duration=?"
-                + "WHERE voucherid=?";
+        String updateQuery =      "UPDATE voucher "
+                + "SET code = ?, remaining = ?, discount = ?, duration = ? "
+                + "WHERE voucherid = ?";
         try (PreparedStatement prepare = connect.prepareStatement(updateQuery)) {
             prepare.setString(1, code);
             prepare.setInt(2, remaining);

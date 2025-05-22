@@ -19,11 +19,9 @@ public class Session {
     public static Customer getCurrentCustomer() {
         return currentCustomer;
     }
-
     public static Admin getCurrentAdmin() {
         return currentAdmin;
     }
-    
     public Session() {
     }
     public static void logout(){

@@ -1,4 +1,5 @@
 package sample.project_db.databaseConector;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,8 +22,6 @@ public class DatabaseConnector {
     public static Connection connect() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-
-
 
     public static void registerUser(String customerusername, String customerpassword, String question, String answer, String customername, String phonenumber, String email, String address) throws SQLException {
         String sql = "INSERT INTO customer (customerusername, customerpassword, question, answer, customername, phonenumber, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

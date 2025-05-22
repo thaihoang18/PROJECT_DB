@@ -51,7 +51,7 @@ public class RegisterController extends Application {
             String email = emailField.getText();
             String address = addressField.getText();
 
-            if (customerusername.isEmpty() || customerpassword.isEmpty() || answer.isEmpty()|| question.isEmpty()|| customername.isEmpty()|| phonenumber.isEmpty()|| email.isEmpty()|| address.isEmpty()) {
+            if (customerusername.isEmpty() || customerpassword.isEmpty() || answer.isEmpty()|| question.isEmpty()) {
                 messageLabel.setText("Vui lòng điền đầy đủ thông tin.");
             } else {
                 try {

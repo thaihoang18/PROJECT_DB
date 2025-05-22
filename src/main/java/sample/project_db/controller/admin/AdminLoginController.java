@@ -38,7 +38,7 @@ public class AdminLoginController extends Application {
                 try {
                     if(DatabaseConnector.loginUser(customerusername, customerpassword)){
                         messageLabel.setText("Login successfull!");
-                        Session.setCurrentUser(DatabaseConnector.getCustomerByCustomerusername(customerusername));
+                        Session.setCurrentAdmin(DatabaseConnector.getadminByadminusername(customerusername));
                     } else{
                         messageLabel.setText("username or password is false");
                     }

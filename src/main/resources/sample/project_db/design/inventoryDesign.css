@@ -1,0 +1,603 @@
+.side-bar{
+    -fx-background-color: linear-gradient(to bottom, #b6dcff, #9178d1);
+    -fx-background-radius: 0 50px 50px 0;
+    -fx-border-width: 10px 10px 10px 0;
+    -fx-border-color: white;
+    -fx-border-radius: 0 40px 40px 0;
+}
+
+.function{
+    -fx-background-radius: 15px;
+}
+.function:hover{
+    -fx-background-color: #a1c7d1;
+}
+
+.white-bg{
+    -fx-background-color: white;
+}
+
+.header{
+    -fx-background-color: #8FCBED;
+    -fx-background-radius: 0 0 30px 0;
+}
+
+.info-panel{
+    -fx-background-color: linear-gradient(to bottom, #B7E4FA, #91B5FC);
+    -fx-background-radius: 20px;
+}
+
+.chart-panel{
+    -fx-background-color: transparent;
+    -fx-background-radius: 30px;
+    -fx-border-color: #B5E4FA;
+    -fx-border-width: 10px;
+    -fx-border-radius: 20px;
+}
+
+.trans-bg{
+    -fx-background-color: transparent;
+}
+
+.signout-panel{
+    -fx-background-color: transparent;
+    -fx-background-radius: 15px;
+}
+.bg-radious{
+    -fx-background-radius: 15px;
+}
+
+.purple-bg{
+    -fx-background-color: linear-gradient(to bottom, #341c63, #9178d1);
+}
+
+#trending-bg{
+    -fx-background-color: #5c0090;
+    -fx-background-radius: 20px 20px 0 0;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 160px;
+}
+
+#book-bg{
+    -fx-background-color: #9178d1;
+    -fx-background-radius: 20px 20px 0 0;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 160px;
+}
+
+#stationery-bg{
+    -fx-background-color: #6e83ea;
+    -fx-background-radius: 20px 20px 0 0;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 160px;
+}
+
+#toy-bg{
+    -fx-background-color: #80abf2;
+    -fx-background-radius: 20px 20px 0 0;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 160px;
+}
+
+.trending-bg{
+    -fx-background-color: #5c0090;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+.book-bg{
+    -fx-background-color: #9178d1;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+.stationery-bg{
+    -fx-background-color: #6e83ea;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+.toy-bg{
+    -fx-background-color: #80abf2;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+.payment-bar{
+    -fx-background-color: linear-gradient(to bottom, #b6dcff, #9178d1);
+}
+
+.payment-panel{
+    -fx-border-width: 0px 0px 0px 5px;
+    -fx-border-color: #c8b7f1;
+}
+
+.lower-payment-panel{
+    -fx-border-width: 0px 0px 5px 0px;
+    -fx-border-color: #c8b7f1;
+}
+
+.voucher-button-bg{
+    -fx-background-color: #8f9de6;
+    -fx-background-radius: 5px 5px 5px 5px;
+}
+
+.tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab-header-area {
+    /*-fx-padding: 0 0 0 0;*/
+    /*-fx-pref-height: 50px;*/
+}
+
+.tab:selected {
+    -fx-border-color: transparent;
+    -fx-border-radius:  20px 20px 0 0;
+    -fx-border-width: 0px 0px 0 0px;
+    -fx-pref-height: 50px;
+    /*-fx-translate-y: -5px;*/
+}
+
+.tab:selected:top {
+    -fx-border-color: transparent;
+    -fx-border-radius: 0;
+    -fx-border-width: 0;
+
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.tab-container .focus-indicator{
+    -fx-border-color: transparent;
+    -fx-border-radius: 0;
+    -fx-border-width: 0;
+
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+
+
+.tab-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}
+
+.search-bar{
+    -fx-background-color: white;
+    -fx-border-width: 5px;
+    -fx-border-color: #c8b7f1;
+    -fx-border-radius: 5px;
+}
+
+
+.placeholder{
+    -fx-background-color: transparent;
+}
+
+.virtual-flow{
+    -fx-background-color: red;
+}
+
+.scroll-pane{
+    -fx-background-color: transparent;
+}
+
+.inventory-table{
+    -fx-background-color: white;
+    -fx-border-width: 5px;
+    -fx-border-color: #b6dcff;
+    -fx-border-radius: 5px;
+}
+
+.root{
+    -fx-background-color: transparent;
+}
+
+.column-header-background .table-column {
+    /*-fx-padding: 10px 0 10px 0; !* Thay đổi khoảng cách trên và dưới *!*/
+    -fx-font-size: 16px;    /* Tăng kích thước font để làm header cao hơn */
+    -fx-alignment: CENTER;  /* Căn giữa nội dung */
+    -fx-pref-height: 50px;
+    -fx-background-color: #9178d1 ;
+}
+
+.column-header-background .table-column .text{
+    -fx-fill: white;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell:hover{
+    -fx-background-color: #d6c5ff;
+}
+
+.inventory-table-border{
+    -fx-border-color: linear-gradient(to top, #b6dcff, #9178d1);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+    -fx-background-insets: 0;
+}
+
+.inventory-table-border-left{
+    -fx-border-color: linear-gradient(to left, #b6dcff, #9178d1);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+    -fx-background-insets: 0;
+}
+
+.inventory-table-border-right{
+    -fx-border-color: linear-gradient(to right, #b6dcff, #9178d1);
+    -fx-border-width: 9px;
+    -fx-border-radius: 7px;
+    -fx-background-insets: 0;
+}
+
+
+
+.table-view .table-row-cell:selected{
+    -fx-background-color: #8056ed;
+}
+
+.table-view .table-row-cell:selected .text {   /* mọi nút Text trong hàng */
+    -fx-fill: white;                 /* chữ trắng */
+}
+
+
+/*.table-column {*/
+/*    -fx-background-color: #9178d1;*/
+/*}*/
+/*.table-column .label .text{*/
+/*    -fx-fill: White;*/
+/*}*/
+/*.table-view .column-resize-line {*/
+/*    -fx-background: -fx-accent;*/
+/*    -fx-background-color: -fx-background;*/
+/*    -fx-padding: 0.0em 0.0416667em 0.0em 0.0416667em; !* 0 0.571429 0 0.571429 *!*/
+/*}*/
+
+.text-box{
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-border-color: #b6dcff;
+}
+
+.type-selection-box {
+    -fx-background-color: #b6dcff;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-border-color: #b6dcff;
+}
+
+.type-selection-box-2 {
+    -fx-background-color: #aa92ec;
+    -fx-border-radius: 6px;
+    -fx-border-width: 2px;
+    -fx-border-color: #9178d1;
+    -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
+}
+
+.type-selection-box .list-view .cell .text {
+    -fx-fill: black;
+}
+
+.type-selection-box .list-view .cell:hover .text {
+    -fx-fill: black;
+}
+
+/* Giữ text đen khi ô được chọn và hover */
+.type-selection-box .list-view .cell:filled:selected:hover .text {
+    -fx-fill: black;
+}
+
+/* 1. Giữ text đen dù cell có state gì */
+.type-selection-box .list-view .list-cell .text {
+    -fx-fill: black;
+}
+
+/* 2. Khi cell được hover */
+.type-selection-box .list-view .list-cell:hover {
+    /* nếu bạn muốn giữ nền sáng hoặc cho nó tối nhẹ để thấy hover */
+    -fx-background-color: derive(#b6dcff, 20%);  /* ví dụ nhạt màu hơn nền chính */
+}
+
+/* 3. Khi cell hover thì text vẫn đen */
+.type-selection-box .list-view .list-cell:hover .text {
+    -fx-fill: black;
+}
+
+/* 4. Khi cell được chọn (selection) */
+.type-selection-box .list-view .list-cell:selected {
+    /* giữ selection bar color nếu cần */
+    -fx-background-color: derive(#b6dcff, 10%);
+}
+
+/* 5. Giữ text đen trong selection */
+.type-selection-box .list-view .list-cell:selected .text {
+    -fx-fill: black;
+}
+
+/* 6. (Tùy chọn) Override selection-bar-text */
+.type-selection-box .list-view {
+    -fx-selection-bar-text: black;
+}
+
+.type-selection-box .arrow-button{
+    -fx-background-color: transparent;
+}
+
+.type-selection-box .increment-arrow-button{
+    -fx-background-color: transparent;
+}
+
+.type-selection-box .increment-arrow-button .increment-arrow {
+    -fx-background-color: white;
+}
+
+.type-selection-box .increment-arrow-button:hover .increment-arrow {
+    -fx-background-color: #44b0ff;
+}
+.type-selection-box .increment-arrow-button:pressed .increment-arrow {
+    -fx-background-color: #009cff;
+}
+
+.type-selection-box .decrement-arrow-button{
+    -fx-background-color: transparent;
+}
+
+.type-selection-box .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: white;
+}
+
+.type-selection-box .decrement-arrow-button:hover .decrement-arrow {
+    -fx-background-color: #5dbdfb;
+}
+
+.type-selection-box .decrement-arrow-button:pressed .decrement-arrow {
+    -fx-background-color: #009cff;
+}
+
+.combo-box {
+    -fx-background-color: #b6dcff;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-border-color: #b6dcff;
+}
+.combo-box .arrow-button{
+    -fx-background-color: transparent;
+}
+.combo-box .list-cell{
+    -fx-background-color: white;
+    -fx-border-width: 1px;
+    -fx-border-color: #b6dcff;
+    /*-fx-pref-height: 50%;*/
+    /*-fx-pref-width: 50%;*/
+    -fx-cell-size: 18px;
+}
+
+.column-overlay{
+    -fx-background-color: white;
+}
+
+.inventory-button{
+    -fx-background-color: #b6dcff;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-border-color: #b6dcff;
+    -fx-effect: dropshadow(gaussian, #5a9cd6, 10, 0.3, 2, 2);
+}
+
+.inventory-button:hover{
+    -fx-background-color: #5faeef;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+}
+
+.inventory-button:pressed{
+    -fx-background-color: #5099f1;
+}
+
+.inventory-place-order{
+    -fx-background-color:  #aa92ec;
+    -fx-border-radius: 3px;
+    -fx-border-width: 3px;
+    -fx-border-color:  #9178d1;
+    -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
+}
+
+.inventory-place-order .text{
+    -fx-fill: white;
+}
+
+.inventory-place-order:hover{
+    -fx-background-color: #bb95ff;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+}
+
+.inventory-place-order:pressed{
+    -fx-background-color: #8459ff;
+}
+
+.type-selection-box .arrow-button .arrow {
+    -fx-fill: white;
+}
+
+.type-selection-box-2 .increment-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.type-selection-box-2 .increment-arrow-button .increment-arrow {
+    -fx-background-color: white;
+}
+
+.type-selection-box-2 .increment-arrow-button:hover .increment-arrow {
+    -fx-background-color: #d3b2ff; /* tím nhạt */
+}
+
+.type-selection-box-2 .increment-arrow-button:pressed .increment-arrow {
+    -fx-background-color: #8459ff; /* tím đậm */
+}
+
+.type-selection-box-2 .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.type-selection-box-2 .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: white;
+}
+
+.type-selection-box-2 .decrement-arrow-button:hover .decrement-arrow {
+    -fx-background-color: #d3b2ff;
+}
+
+.type-selection-box-2 .decrement-arrow-button:pressed .decrement-arrow {
+    -fx-background-color: #8459ff;
+}
+
+.combo-box .arrow-button .arrow{
+    -fx-background-color: white;
+}
+
+.combo-box .list-cell:selected .text {
+    -fx-fill: black;
+}
+
+/* 1. Mặc định text trong combo-box phải đen */
+.combo-box .list-cell .text {
+    -fx-fill: black;
+}
+
+/* 2. Khi hover vào item */
+.combo-box .list-cell:hover {
+    -fx-background-color: derive(#b6dcff, 20%);
+}
+.combo-box .list-cell:hover .text {
+    -fx-fill: black;
+}
+
+/* 4. Đảm bảo selection-bar-text nếu dùng popup ListView nội bộ */
+.combo-box-popup .list-view {
+    -fx-selection-bar-text: black;
+}
+
+.voucher-button{
+    -fx-background-color: #8f9de6;
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-border-color: #5c74ed;
+}
+
+.vouher-bar{
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: #8f9de6;
+    -fx-border-radius: 5px;
+}
+
+.inventory-search-bar{
+    -fx-background-color: white;
+    -fx-border-width: 5px;
+    -fx-border-color: #9178d1;
+    -fx-border-radius: 20px;
+}
+
+.invisible-bg{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane {
+    /* Không bao giờ hiển thị scrollbar */
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
+
+/* Đè thẳng lên track và thumb của scrollbar (nếu có residual) */
+.text-area .scroll-pane .scroll-bar {
+    -fx-opacity: 0;       /* trong suốt */
+    -fx-max-width: 0;     /* không chiếm không gian */
+    -fx-max-height: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+/* Đảm bảo viewport lấp đầy */
+.text-area .scroll-pane .viewport {
+    -fx-padding: 0;       /* bỏ padding nếu có */
+}
+
+.text-area {
+    -fx-background-color: transparent;     /* nền chính trong suốt */
+    -fx-background-insets: 0;              /* bỏ mọi inset */
+    -fx-background-radius: 0;              /* không bo góc */
+    -fx-border-color: transparent;         /* bỏ khung viền */
+    -fx-padding: 0;                        /* bỏ padding */
+    -fx-focus-color: transparent;          /* remove focus ring */
+    -fx-faint-focus-color: transparent;    /* remove faint focus */
+}
+
+.text-box-2 {
+    -fx-background-color: transparent;     /* nền chính trong suốt */
+    -fx-background-insets: 0;              /* bỏ mọi inset */
+    -fx-background-radius: 0;              /* không bo góc */
+    -fx-border-color: transparent;         /* bỏ khung viền */
+    -fx-padding: 0;                        /* bỏ padding */
+    -fx-focus-color: transparent;          /* remove focus ring */
+    -fx-faint-focus-color: transparent;    /* remove faint focus */
+    -fx-text-fill: white;
+}
+
+.text-box-3 {
+    -fx-background-color: transparent;     /* nền chính trong suốt */
+    -fx-background-insets: 0;              /* bỏ mọi inset */
+    -fx-background-radius: 0;              /* không bo góc */
+    -fx-border-color: transparent;         /* bỏ khung viền */
+    -fx-padding: 0;                        /* bỏ padding */
+    -fx-focus-color: transparent;          /* remove focus ring */
+    -fx-faint-focus-color: transparent;    /* remove faint focus */
+    -fx-text-fill: white;
+}
+
+
+
+
+/* 2) Khu vực chứa text */
+.text-area .content {
+    -fx-background-color: transparent;     /* nền của content pane */
+}
+
+/* 3) Viewport của ScrollPane (nếu còn) */
+.text-area .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* 4) ScrollBars cũng ẩn luôn, đề phòng còn đọng lại */
+.text-area .scroll-pane .scroll-bar {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.cart-item{
+    -fx-background-color: linear-gradient(to left, #ecf8ff, #f2efff);
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0.4, 0, 8);
+}
+
+.usui-bg{
+    -fx-background-color: linear-gradient(to right, #f2fbff, #ededff);
+}
+
+.gradient-bg{
+    -fx-background-color: linear-gradient(to left, #b6dcff, #9178d1);
+    -fx-background-radius: 30px;
+    -fx-effect: dropshadow(gaussian, #5c45a3, 10, 0.3, 2, 2);
+}

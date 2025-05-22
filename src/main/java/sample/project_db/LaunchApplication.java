@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import sample.project_db.model.Admin;
+import sample.project_db.model.VoucherList;
 
 
 public class LaunchApplication extends Application {
@@ -29,4 +30,6 @@ public class LaunchApplication extends Application {
     private Button user_btn;
 
     public static Admin localAdmin = new Admin();
+
+    public static VoucherList localVoucher = new VoucherList();
 }

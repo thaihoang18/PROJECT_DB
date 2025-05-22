@@ -14,7 +14,7 @@ public class DashboardController extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(
                 DashboardController.class.getResource(
-                        "/sample/project_db/viewcontroller/ProfileController.fxml"
+                        "/sample/project_db/viewcontroller/VoucherController.fxml"
                 )
         );
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);

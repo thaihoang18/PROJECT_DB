@@ -16,7 +16,7 @@ public class DatabaseConnector {
 
     private static final String URL = "jdbc:postgresql://pg-3e21c264-hustbookstore.h.aivencloud.com:25381/defaultdb";
     private static final String USER = "avnadmin";
-    private static final String PASSWORD = "2005";
+    private static final String PASSWORD = "AVNS_ZHQAYXiiXVHd8_NdUAl";
 
     public static Connection connect() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);

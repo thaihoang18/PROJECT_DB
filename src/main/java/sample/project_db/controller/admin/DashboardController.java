@@ -14,10 +14,10 @@ public class DashboardController extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(
                 DashboardController.class.getResource(
-                        "/sample/project_db/viewcontroller/InventoryController.fxml"
+                        "/sample/project_db/viewcontroller/ProfileController.fxml"
                 )
         );
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Test thu");
         primaryStage.show();

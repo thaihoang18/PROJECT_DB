@@ -1,19 +1,18 @@
-package sample.project_db.controller.admin;
-
-import java.io.IOException;
+package com.example.ecommerce.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Node;
+import java.io.IOException;
 
-public class HomeScreenController{
+public class HomeController {
 
     @FXML
     public void handleAdminLogin(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/project_db/viewcontroller/admin_login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/admin_login.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -23,7 +22,7 @@ public class HomeScreenController{
 
     @FXML
     public void handleCustomerLogin(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/project_db/viewcontroller/customer_login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/customer_login.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -31,6 +30,3 @@ public class HomeScreenController{
         stage.show();
     }
 }
-
-
-

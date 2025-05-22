@@ -2,6 +2,8 @@ module sample.project_db {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires javafx.graphics;
+    requires javafx.base;
 
     opens sample.project_db.model to javafx.base, javafx.fxml; 
 

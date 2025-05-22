@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import sample.project_db.databaseConector.DatabaseConnector;
 import sample.project_db.session.Session;
 
-public class LoginController extends Application {
+public class AdminLoginController extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Tạo các trường nhập

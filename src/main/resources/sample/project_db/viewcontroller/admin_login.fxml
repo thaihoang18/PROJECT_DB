@@ -5,7 +5,7 @@
 
 <VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="sample.project_db.controller.admin.AdminLoginController">
+      fx:controller="sample.project_db.controller.admin.AdminLoginControllerTest">
     <Label text="Admin Login"/>
     <TextField fx:id="usernameField" promptText="Tên đăng nhập"/>
     <PasswordField fx:id="passwordField" promptText="Mật khẩu"/>

@@ -1,5 +1,4 @@
 package sample.project_db.databaseConector;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,9 +37,9 @@ public class DatabaseConnector {
             stmt.executeUpdate();
         }
     }
+
     public static void registerAdmin(String adminusername, String adminpassword, String question, String answer, String adminname, String phonenumber, String email) throws SQLException {
         String sql = "INSERT INTO admin (adminusername, adminpassword, question, answer, adminname, phonenumber, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, adminusername);
             stmt.setString(2, adminpassword);

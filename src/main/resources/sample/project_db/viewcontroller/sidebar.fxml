@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" style="-fx-background-color: #2D7D9A; -fx-padding: 20;"
+    xmlns="http://javafx.com/javafx/8"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="sample.project_db.controller.SidebarController">
+
+    <Label text="Cafe Shop Management System" style="-fx-text-fill: white; -fx-font-size: 14;" />
+    <Label text="Welcome, Admin111" style="-fx-text-fill: white;" />
+
+    <Button text="Dashboard" onAction="#handleDashboard" />
+    <Button text="Store" onAction="#handleStore" />
+    <Button text="Inventory" onAction="#handleInventory" />
+    <Button text="Menu" onAction="#handleMenu" />
+    <Button text="Customers" onAction="#handleCustomers" />
+    <Button text="Sign Out" onAction="#handleSignOut" />
+    
+</VBox>

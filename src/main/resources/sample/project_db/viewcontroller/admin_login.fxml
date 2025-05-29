@@ -8,6 +8,9 @@
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" prefHeight="133.0" prefWidth="181.0" spacing="10" styleClass="gradient-bg" stylesheets="@../design/inventoryDesign.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.project_db.controller.admin.AdminLoginControllerTest">
+<left>
+                <fx:include source="sidebar.fxml" />
+    </left>
     <Label text="Admin Login" textFill="WHITE">
       <font>
          <Font name="System Bold" size="16.0" />

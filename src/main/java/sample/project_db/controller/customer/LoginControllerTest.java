@@ -1,4 +1,4 @@
-package sample.project_db.controller.admin;
+package sample.project_db.controller.customer;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import sample.project_db.databaseConector.DatabaseConnector;
 import sample.project_db.session.Session;
 
-public class AdminLoginControllerTest {
+public class LoginControllerTest {
     @FXML
     private TextField usernameField;
 
@@ -30,8 +30,8 @@ public class AdminLoginControllerTest {
         String username = usernameField.getText();
         String password = passwordField.getText();
         try {
-            if(DatabaseConnector.loginAdmin(username, password)){
-                Session.setCurrentAdmin(DatabaseConnector.getadminByadminusername(username));
+            if(DatabaseConnector.loginCustomer(username, password)){
+                Session.setCurrentCustomer(DatabaseConnector.getCustomerByCustomerusername(username));
                 System.err.println("");
                 System.err.println("");
                 System.err.println("");
@@ -40,7 +40,7 @@ public class AdminLoginControllerTest {
                 Scene scene = new Scene(loader.load());
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);
-                stage.setTitle("Admin Login");
+                stage.setTitle("Customer Login");
                 stage.show();
                 showAlert(Alert.AlertType.INFORMATION, "Đăng nhập thành công!");
             } else{

@@ -36,7 +36,7 @@ public class LoginController extends Application {
                 messageLabel.setText("Vui lòng điền đầy đủ thông tin.");
             } else {
                 try {
-                    if(DatabaseConnector.loginUser(customerusername, customerpassword)){
+                    if(DatabaseConnector.loginCustomer(customerusername, customerpassword)){
                         messageLabel.setText("Login successfull!");
                         Session.setCurrentCustomer(DatabaseConnector.getCustomerByCustomerusername(customerusername));
                     } else{

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class HomeScreenController{
@@ -30,8 +31,17 @@ public class HomeScreenController{
         stage.setTitle("Customer Login");
         stage.show();
     }
-
-
+    @FXML
+    private StackPane stackPane;
+    
+    public void setContent(String fxmlPath) {
+        try {
+            Node node = FXMLLoader.load(getClass().getResource(fxmlPath));
+            stackPane.getChildren().setAll(node);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
 }
 

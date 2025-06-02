@@ -22,7 +22,7 @@ public class DatabaseConnector {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public static void registerUser(String customerusername, String customerpassword, String question, String answer, String customername, String phonenumber, String email, String address) throws SQLException {
+    public static boolean  registerCustomer(String customerusername, String customerpassword, String question, String answer, String customername, String phonenumber, String email, String address)  {
         String sql = "INSERT INTO customer (customerusername, customerpassword, question, answer, customername, phonenumber, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -35,23 +35,39 @@ public class DatabaseConnector {
             stmt.setString(7, email);
             stmt.setString(8, address);
             stmt.executeUpdate();
+            return true;
+        } catch(SQLException e){
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public static void registerAdmin(String adminusername, String adminpassword, String question, String answer, String adminname, String phonenumber, String email) throws SQLException {
-        String sql = "INSERT INTO admin (adminusername, adminpassword, question, answer, adminname, phonenumber, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, adminusername);
-            stmt.setString(2, adminpassword);
-            stmt.setString(3, question);
-            stmt.setString(4, answer);
-            stmt.setString(5, adminname);
-            stmt.setString(6, phonenumber);
-            stmt.setString(7, email);
-            stmt.executeUpdate();
-        }
+public static boolean registerAdmin(String username, String password, String question, String answer,
+                                    String name, String phone, String email) {
+    String sql = "INSERT INTO admin (adminusername, adminpassword, question, answer, adminname, phonenumber, email) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    try (Connection conn = connect();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, username);
+        ps.setString(2, password);
+        ps.setString(3, question);
+        ps.setString(4, answer);
+        ps.setString(5, name);
+        ps.setString(6, phone);
+        ps.setString(7, email);
+
+        ps.executeUpdate();
+        return true;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
     }
-    public static boolean  loginUser(String customerusername, String customerpassword) throws SQLException {
+}
+
+    public static boolean  loginCustomer(String customerusername, String customerpassword) throws SQLException {
         String sql = "SELECT customerusername, customerpassword FROM customer WHERE customerusername =? AND customerpassword =?";
 
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -111,11 +127,7 @@ public class DatabaseConnector {
          Statement stmt = conn.createStatement();
          ResultSet resultSet = stmt.executeQuery(sql)) {
             while(resultSet.next()){
-                allProduct.add(new Product(
-                    resultSet.getString("name"),
-                    resultSet.getInt("quantity"),
-                    resultSet.getDouble("sellprice")
-                ));
+                    allProduct.add(mapProduct(resultSet));
             } 
             return allProduct;
         }
@@ -129,13 +141,131 @@ public class DatabaseConnector {
             pstmt.setString(1, "%"+ searchKey+"%");
             ResultSet resultSet = pstmt.executeQuery();
             while(resultSet.next()){
-                allProduct.add(new Product(
-                    resultSet.getString("name"),
-                    resultSet.getInt("quantity"),
-                    resultSet.getDouble("sellprice")
-                ));
+                allProduct.add(mapProduct(resultSet));
             } 
             return allProduct;
         }
     }
+    public static List<String> getAllCategories() throws SQLException {
+        List<String> categories = new ArrayList<>();
+        String query = "SELECT categoryname FROM category";
+        try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                categories.add(rs.getString("categoryname"));
+            }
+        }
+        return categories;
+    }
+
+    public static List<Product> getProductsByCategory(String category) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String query = """
+        SELECT p.*
+        FROM product p
+        JOIN category c ON p.categoryid = c.categoryid
+        WHERE c.categoryname = ?
+    """;
+        try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, category);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                products.add(mapProduct(rs)); // Hàm mapProduct để chuyển từ ResultSet sang Product
+            }
+        }
+        return products;
+    }
+    private static Product mapProduct(ResultSet rs) throws SQLException {
+    Product p = new Product();
+    System.out.println(".()cccccccccccc"+rs.getInt("productid"));
+    System.out.println(".()cccccccccccc"+rs.getInt("productid"));
+    System.out.println(".()cccccccccccc"+rs.getInt("productid"));
+    System.out.println(".()cccccccccccc"+rs.getInt("productid"));
+    System.out.println(".()cccccccccccc"+rs.getInt("productid"));
+    System.out.println(".()cccccccccccc"+rs.getInt("productid"));
+    p.setProductid(rs.getInt("productid"));
+    // p.setType(rs.getString("type"));
+    p.setName(rs.getString("name"));
+    p.setImage(rs.getString("image"));
+    p.setDistributor(rs.getString("distributor"));
+    p.setDesscription(rs.getString("description"));
+    p.setAddeddate(rs.getDate("addeddate") != null ? rs.getDate("addeddate").toLocalDate() : null);
+    p.setQuantity(rs.getInt("quantity"));
+    p.setImportprice(rs.getDouble("importprice"));
+    p.setSellprice(rs.getDouble("sellprice"));
+    p.setAge(rs.getInt("age"));
+    p.setIsbn(rs.getString("isbn"));
+    p.setAuthor(rs.getString("author"));
+    // p.setGenre(rs.getString("genre"));
+    p.setPublishdate(rs.getDate("publishdate") != null ? rs.getDate("publishdate").toLocalDate() : null);
+    p.setCategoryid(rs.getInt("categoryid"));
+    return p;
+}
+public static boolean addToCart(int customerId, int productId, int quantity) throws SQLException {
+    Connection conn = connect();
+
+    // 1. Tìm cart hiện tại
+    String findCartSql = "SELECT cartid FROM cart WHERE customerid = ?";
+    PreparedStatement findCartStmt = conn.prepareStatement(findCartSql);
+    findCartStmt.setInt(1, customerId);
+    ResultSet rs = findCartStmt.executeQuery();
+
+    int cartId;
+    if (rs.next()) {
+        cartId = rs.getInt("cartid");
+    } else {
+        // Tạo cart mới nếu chưa có
+        String createCartSql = "INSERT INTO cart (customerid, totalcost, finalcost) VALUES (?, 0, 0) RETURNING cartid";
+        PreparedStatement createCartStmt = conn.prepareStatement(createCartSql);
+        createCartStmt.setInt(1, customerId);
+        ResultSet newCartRs = createCartStmt.executeQuery();
+        if (!newCartRs.next()) return false;
+        cartId = newCartRs.getInt("cartid");
+    }
+
+    // 2. Kiểm tra sản phẩm đã có trong cart chưa
+    String checkItemSql = "SELECT cartitemid, quantity FROM cartitem WHERE cartid = ? AND productid = ?";
+    PreparedStatement checkStmt = conn.prepareStatement(checkItemSql);
+    checkStmt.setInt(1, cartId);
+    checkStmt.setInt(2, productId);
+    ResultSet itemRs = checkStmt.executeQuery();
+
+    if (itemRs.next()) {
+        // Cập nhật số lượng
+        int newQuantity = itemRs.getInt("quantity") + quantity;
+        String updateSql = "UPDATE cartitem SET quantity = ? WHERE cartid = ? AND productid = ?";
+        PreparedStatement updateStmt = conn.prepareStatement(updateSql);
+        updateStmt.setInt(1, newQuantity);
+        updateStmt.setInt(2, cartId);
+        updateStmt.setInt(3, productId);
+        updateStmt.executeUpdate();
+    } else {
+        // Thêm mới
+        String insertSql = "INSERT INTO cartitem (cartid, productid, quantity) VALUES (?, ?, ?)";
+        PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+        insertStmt.setInt(1, cartId);
+        insertStmt.setInt(2, productId);
+        insertStmt.setInt(3, quantity);
+        insertStmt.executeUpdate();
+    }
+
+    // 3. Cập nhật tổng chi phí giỏ hàng (giản lược)
+    String updateCostSql = """
+        UPDATE cart
+        SET totalcost = (
+            SELECT SUM(p.sellprice * ci.quantity)
+            FROM cartitem ci JOIN product p ON ci.productid = p.productid
+            WHERE ci.cartid = ?
+        ),
+        finalcost = totalcost
+        WHERE cartid = ?
+    """;
+    PreparedStatement costStmt = conn.prepareStatement(updateCostSql);
+    costStmt.setInt(1, cartId);
+    costStmt.setInt(2, cartId);
+    costStmt.executeUpdate();
+
+    return true;
+}
+
+
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="sample.project_db.controller.HeaderController"
+      alignment="CENTER_LEFT"
+      spacing="20"
+      style="-fx-padding: 10; -fx-background-color: #dddddd;">
+    
+    <Label text="📚 Bookstore" style="-fx-font-size: 18px;"/>
+    <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
+    <Button text="Trang chủ" onAction="#goHome"/>
+    <Button text="Hồ sơ" onAction="#goProfile"/>
+    <Button text="Login" onAction="#goLogin"/>
+    <Button text="Store" onAction="#goStore"/>
+    <Button text="Signup" onAction="#goSignup"/>
+</VBox>

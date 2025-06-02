@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="10" style="-fx-background-color: #2D7D9A; -fx-padding: 20;"
-    xmlns="http://javafx.com/javafx/8"
-    xmlns:fx="http://javafx.com/fxml"
-    fx:controller="sample.project_db.controller.SidebarController">
-
-    <Label text="Cafe Shop Management System" style="-fx-text-fill: white; -fx-font-size: 14;" />
-    <Label text="Welcome, Admin111" style="-fx-text-fill: white;" />
-
-    <Button text="Dashboard" onAction="#handleDashboard" />
-    <Button text="Store" onAction="#handleStore" />
-    <Button text="Inventory" onAction="#handleInventory" />
-    <Button text="Menu" onAction="#handleMenu" />
-    <Button text="Customers" onAction="#handleCustomers" />
-    <Button text="Sign Out" onAction="#handleSignOut" />
+<VBox fx:id="sidebar" spacing="10" alignment="TOP_LEFT"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="sample.project_db.controller.SidebarController"
+      style="-fx-background-color: #2c3e50; -fx-padding: 20;">
     
+    <Label text="Bookstore App" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <Button fx:id="btnLogin" text="Login" onAction="#handleLogin" prefWidth="150"/>
+    <Button fx:id="btnSignup" text="Signup" onAction="#handleSignup" prefWidth="150"/>
+    <Button fx:id="btnProfile" text="Profile" onAction="#handleProfile" prefWidth="150"/>
+    <Button fx:id="btnLogout" text="Logout" onAction="#handleLogout" prefWidth="150"/>
+    <Button fx:id="btnInventory" text="Inventory" onAction="#handleInventory" prefWidth="150"/>
+
 </VBox>

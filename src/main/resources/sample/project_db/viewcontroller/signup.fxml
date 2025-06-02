@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="sample.project_db.controller.customer.SignupController"
+      alignment="CENTER"
+      spacing="10"
+      style="-fx-padding: 30; -fx-background-color: #f4f4f4;">
+    
+    <Label text="Đăng ký customer" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <TextField fx:id="usernameField" promptText="Tên đăng nhập"/>
+    <PasswordField fx:id="passwordField" promptText="Mật khẩu"/>
+    <TextField fx:id="nameField" promptText="Tên đầy đủ"/>
+    <TextField fx:id="phoneField" promptText="Số điện thoại"/>
+    <TextField fx:id="emailField" promptText="Email"/>
+    <TextField fx:id="questionField" promptText="Câu hỏi bảo mật"/>
+    <TextField fx:id="answerField" promptText="Câu trả lời bảo mật"/>
+    <TextField fx:id="addressField" promptText="Dia chi"/>
+
+    <Button text="Đăng ký" onAction="#handleSignup"/>
+</VBox>

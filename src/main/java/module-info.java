@@ -9,6 +9,8 @@ exports sample.project_db.controller.customer to javafx.fxml;
 
     opens sample.project_db.model to javafx.base, javafx.fxml; 
     exports sample.project_db;
+    opens sample.project_db.DTO to javafx.base;
+
 
 
     opens sample.project_db to javafx.graphics, javafx.fxml;

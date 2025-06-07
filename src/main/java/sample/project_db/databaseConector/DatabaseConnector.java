@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import sample.project_db.DTO.RevenueDTO;
 import sample.project_db.model.Admin;
 import sample.project_db.model.Customer;
 import sample.project_db.model.Product;
@@ -42,24 +43,21 @@ public class DatabaseConnector {
         }
     }
 
-public static boolean registerAdmin(String username, String password, String question, String answer,
-                                    String name, String phone, String email) {
-    String sql = "INSERT INTO admin (adminusername, adminpassword, question, answer, adminname, phonenumber, email) " +
-                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
+public static boolean registerAdmin(String username, String password, String question, String answer) {
+    String sql = "  SELECT admin_signup " +
+                 "(?, ?, ?, ?)";
 
     try (Connection conn = connect();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
+         PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 
-        ps.setString(1, username);
-        ps.setString(2, password);
-        ps.setString(3, question);
-        ps.setString(4, answer);
-        ps.setString(5, name);
-        ps.setString(6, phone);
-        ps.setString(7, email);
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
+        preparedStatement.setString(3, question);
+        preparedStatement.setString(4, answer);
 
-        ps.executeUpdate();
-        return true;
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return (boolean)resultSet.getBoolean(1);
 
     } catch (SQLException e) {
         e.printStackTrace();
@@ -78,13 +76,15 @@ public static boolean registerAdmin(String username, String password, String que
         }
     }
     public static boolean  loginAdmin(String adminusername, String adminpassword) throws SQLException {
-        String sql = "SELECT adminusername, adminpassword FROM admin WHERE adminusername =? AND adminpassword =?";
+        String sql = "SELECT admin_login(?,?)";
 
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, adminusername);
             stmt.setString(2, adminpassword);
             ResultSet resultSet = stmt.executeQuery();
-            return resultSet.next();
+            resultSet.next();
+
+            return (boolean)resultSet.getBoolean(1);
         }
     }
     public static Customer getCustomerByCustomerusername(String customerusername) throws SQLException {
@@ -159,12 +159,7 @@ public static boolean registerAdmin(String username, String password, String que
 
     public static List<Product> getProductsByCategory(String category) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = """
-        SELECT p.*
-        FROM product p
-        JOIN category c ON p.categoryid = c.categoryid
-        WHERE c.categoryname = ?
-    """;
+        String query = "select * from find_by_category(?)";
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, category);
             ResultSet rs = stmt.executeQuery();
@@ -265,6 +260,20 @@ public static boolean addToCart(int customerId, int productId, int quantity) thr
     costStmt.executeUpdate();
 
     return true;
+}
+public static List<RevenueDTO> getMonthlyRevenue() throws SQLException{
+    List<RevenueDTO> monthlyRevenue = new ArrayList<>();
+    Connection connection = connect();
+    String sql = "select * from get_monthly_revenue()";
+    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    ResultSet resultSet = preparedStatement.executeQuery();
+    while (resultSet.next()) {
+        RevenueDTO revenueDTO = new RevenueDTO();
+        revenueDTO.setMonth(resultSet.getString("month"));
+        revenueDTO.setRevenue(resultSet.getDouble(("revenue")));
+        monthlyRevenue.add(revenueDTO);
+    }
+    return  monthlyRevenue;
 }
 
 

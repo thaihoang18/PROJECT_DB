@@ -20,7 +20,7 @@ public class HeaderController {
     @FXML
     private void goProfile() {
         if (mainController != null) {
-            mainController.setContent("/sample/project_db/viewcontroller/profile.fxml");
+            mainController.setContent("/sample/project_db/viewcontroller/ProfileController.fxml");
         }
     }
     @FXML
@@ -33,6 +33,12 @@ public class HeaderController {
     private void goStore() {
         if (mainController != null) {
             mainController.setContent("/sample/project_db/viewcontroller/store.fxml");
+        }
+    }
+    @FXML
+    private void goVoucher() {
+        if (mainController != null) {
+            mainController.setContent("/sample/project_db/viewcontroller/VoucherController.fxml");
         }
     }
     @FXML

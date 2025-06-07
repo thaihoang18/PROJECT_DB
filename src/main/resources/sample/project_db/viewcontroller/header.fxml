@@ -17,4 +17,5 @@
     <Button text="Login" onAction="#goLogin"/>
     <Button text="Store" onAction="#goStore"/>
     <Button text="Signup" onAction="#goSignup"/>
+    <Button text="Voucher" onAction="#goVoucher"/>
 </VBox>

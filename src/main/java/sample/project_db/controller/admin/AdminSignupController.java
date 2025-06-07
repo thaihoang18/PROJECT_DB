@@ -18,9 +18,9 @@ public class AdminSignupController {
     private void handleSignup() {
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
-        String name = nameField.getText().trim();
-        String phone = phoneField.getText().trim();
-        String email = emailField.getText().trim();
+        // String name = nameField.getText().trim();
+        // String phone = phoneField.getText().trim();
+        // String email = emailField.getText().trim();
         String question = questionField.getText().trim();
         String answer = answerField.getText().trim();
 
@@ -29,7 +29,7 @@ public class AdminSignupController {
             return;
         }
 
-        boolean success = DatabaseConnector.registerAdmin(username, password, question, answer, name, phone, email);
+        boolean success = DatabaseConnector.registerAdmin(username, password, question, answer);
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Đăng ký thành công!");
             clearFields();

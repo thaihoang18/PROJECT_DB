@@ -14,9 +14,9 @@
 
     <TextField fx:id="usernameField" promptText="Tên đăng nhập"/>
     <PasswordField fx:id="passwordField" promptText="Mật khẩu"/>
-    <TextField fx:id="nameField" promptText="Tên đầy đủ"/>
+    <!-- <TextField fx:id="nameField" promptText="Tên đầy đủ"/>
     <TextField fx:id="phoneField" promptText="Số điện thoại"/>
-    <TextField fx:id="emailField" promptText="Email"/>
+    <TextField fx:id="emailField" promptText="Email"/> -->
     <TextField fx:id="questionField" promptText="Câu hỏi bảo mật"/>
     <TextField fx:id="answerField" promptText="Câu trả lời bảo mật"/>
 

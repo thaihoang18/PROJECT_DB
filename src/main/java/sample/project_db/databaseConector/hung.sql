@@ -126,7 +126,6 @@ $$ LANGUAGE plpgsql;
 
 
 
-
 -- them phan tru di voucher, tìm kiếm voucher trong voucherorder sau đó thì trừ đi discount tương ứng
 --trigger function calculate totalprice
 CREATE OR REPLACE FUNCTION calculate_order_total()
@@ -150,9 +149,9 @@ $$ LANGUAGE plpgsql;
 
 
 
-
 --trigger
 CREATE OR REPLACE TRIGGER trigger_calculate_order_total
 AFTER INSERT OR UPDATE OR DELETE ON orderline
 FOR EACH ROW
 EXECUTE FUNCTION calculate_order_total();
+

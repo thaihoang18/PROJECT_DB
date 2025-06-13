@@ -157,6 +157,7 @@ public static boolean registerAdmin(String username, String password, String que
         return categories;
     }
 
+
     public static List<Product> getProductsByCategory(String category) throws SQLException {
         List<Product> products = new ArrayList<>();
         String query = "select * from find_by_category(?)";

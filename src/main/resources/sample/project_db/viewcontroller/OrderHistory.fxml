@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sample.project_db.controller.admin.OrderHistoryController"
+      prefHeight="500.0" prefWidth="800.0" spacing="10" alignment="CENTER">
+    <children>
+        <Label text="Order History" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <TableView fx:id="orderTable">
+            <columns>
+                <TableColumn fx:id="orderIdColumn" text="Order ID" prefWidth="100.0" />
+                <TableColumn fx:id="orderlineIdColumn" text="Orderline ID" prefWidth="100.0" />
+                <TableColumn fx:id="productIdColumn" text="Product ID" prefWidth="100.0" />
+                <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100.0" />
+                <TableColumn fx:id="pricePurchaseColumn" text="Price Purchase" prefWidth="100.0" />
+                <TableColumn fx:id="purchaseDateColumn" text="Purchase Date" prefWidth="150.0" />
+                <TableColumn fx:id="totalPriceColumn" text="Total Price" prefWidth="100.0" />
+            </columns>
+        </TableView>
+        <Label fx:id="totalTransactionsLabel" text="Total Transactions: 0" style="-fx-font-size: 14px;" />
+    </children>
+</VBox>

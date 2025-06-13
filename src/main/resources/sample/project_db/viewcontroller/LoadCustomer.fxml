@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sample.project_db.controller.admin.LoadCustomerController"
+      prefHeight="400.0" prefWidth="800.0" spacing="10" alignment="CENTER">
+    <children>
+        <Label text="Customer List" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <TableView fx:id="customerTable">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0" />
+                <TableColumn fx:id="nameColumn" text="Name" prefWidth="150.0" />
+                <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="100.0" />
+                <TableColumn fx:id="emailColumn" text="Email" prefWidth="150.0" />
+                <TableColumn fx:id="addressColumn" text="Address" prefWidth="200.0" />
+                <TableColumn fx:id="purchaseCountColumn" text="Purchase Count" prefWidth="100.0" />
+            </columns>
+        </TableView>
+    </children>
+</VBox>

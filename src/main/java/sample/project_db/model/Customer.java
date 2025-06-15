@@ -10,6 +10,7 @@ public class Customer{
     private String phonenumber;
     private String email;
     private String address;
+    private  boolean isdeleted;
     
     public Integer getCustomerid() {
         return customerid;
@@ -97,6 +98,15 @@ public class Customer{
         this.phonenumber = phonenumber;
         this.email = email;
         this.address = address;
+        this.isdeleted= false;
+    }
+
+    public boolean getIsdeleted() {
+        return isdeleted;
+    }
+
+    public void setIsdeleted(boolean isdeleted) {
+        this.isdeleted = isdeleted;
     }
     
 

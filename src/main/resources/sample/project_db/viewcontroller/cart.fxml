@@ -1,0 +1,28 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.project_db.controller.customer.CartController"
+            prefHeight="600" prefWidth="800">
+            <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        <TableView fx:id="cartTableView" prefHeight="400">
+            <columns>
+                <TableColumn fx:id="nameCol" text="Tên"/>
+                <TableColumn fx:id="priceCol" text="Giá"/>
+                <TableColumn fx:id="quantityCol" text="SL"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <Label text="Mã voucher:"/>
+            <TextField fx:id="voucherCodeField"/>
+            <Button text="Đặt hàng" onAction="#handleOrder"/>
+        </HBox>
+
+
+</VBox>

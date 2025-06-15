@@ -16,6 +16,12 @@ public class HeaderController {
             mainController.setContent("/sample/project_db/viewcontroller/home.fxml");
         }
     }
+    @FXML
+    private void goCart() {
+        if (mainController != null) {
+            mainController.setContent("/sample/project_db/viewcontroller/cart.fxml");
+        }
+    }
 
     @FXML
     private void goProfile() {

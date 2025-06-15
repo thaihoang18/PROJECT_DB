@@ -8,10 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import sample.project_db.DTO.CartItemDTO;
 import sample.project_db.DTO.RevenueDTO;
 import sample.project_db.model.Admin;
 import sample.project_db.model.Customer;
 import sample.project_db.model.Product;
+import sample.project_db.model.Voucher;
+import sample.project_db.session.Session;
 
 public class DatabaseConnector {
 
@@ -24,7 +29,7 @@ public class DatabaseConnector {
     }
 
     public static boolean  registerCustomer(String customerusername, String customerpassword, String question, String answer, String customername, String phonenumber, String email, String address)  {
-        String sql = "INSERT INTO customer (customerusername, customerpassword, question, answer, customername, phonenumber, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "";
 
         try (Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, customerusername);
@@ -157,6 +162,7 @@ public static boolean registerAdmin(String username, String password, String que
         return categories;
     }
 
+
     public static List<Product> getProductsByCategory(String category) throws SQLException {
         List<Product> products = new ArrayList<>();
         String query = "select * from find_by_category(?)";
@@ -180,7 +186,6 @@ public static boolean registerAdmin(String username, String password, String que
     p.setProductid(rs.getInt("productid"));
     // p.setType(rs.getString("type"));
     p.setName(rs.getString("name"));
-    p.setImage(rs.getString("image"));
     p.setDistributor(rs.getString("distributor"));
     p.setDesscription(rs.getString("description"));
     p.setAddeddate(rs.getDate("addeddate") != null ? rs.getDate("addeddate").toLocalDate() : null);
@@ -196,68 +201,32 @@ public static boolean registerAdmin(String username, String password, String que
     return p;
 }
 public static boolean addToCart(int customerId, int productId, int quantity) throws SQLException {
-    Connection conn = connect();
-
-    // 1. Tìm cart hiện tại
-    String findCartSql = "SELECT cartid FROM cart WHERE customerid = ?";
-    PreparedStatement findCartStmt = conn.prepareStatement(findCartSql);
-    findCartStmt.setInt(1, customerId);
-    ResultSet rs = findCartStmt.executeQuery();
-
-    int cartId;
-    if (rs.next()) {
-        cartId = rs.getInt("cartid");
-    } else {
-        // Tạo cart mới nếu chưa có
-        String createCartSql = "INSERT INTO cart (customerid, totalcost, finalcost) VALUES (?, 0, 0) RETURNING cartid";
-        PreparedStatement createCartStmt = conn.prepareStatement(createCartSql);
-        createCartStmt.setInt(1, customerId);
-        ResultSet newCartRs = createCartStmt.executeQuery();
-        if (!newCartRs.next()) return false;
-        cartId = newCartRs.getInt("cartid");
-    }
-
+    Connection conn = connect();    
     // 2. Kiểm tra sản phẩm đã có trong cart chưa
-    String checkItemSql = "SELECT cartitemid, quantity FROM cartitem WHERE cartid = ? AND productid = ?";
+    String checkItemSql = "SELECT cartitemid, quantity FROM cartitem WHERE customerid = ? AND productid = ?";
     PreparedStatement checkStmt = conn.prepareStatement(checkItemSql);
-    checkStmt.setInt(1, cartId);
+    checkStmt.setInt(1, customerId);
     checkStmt.setInt(2, productId);
     ResultSet itemRs = checkStmt.executeQuery();
 
     if (itemRs.next()) {
         // Cập nhật số lượng
         int newQuantity = itemRs.getInt("quantity") + quantity;
-        String updateSql = "UPDATE cartitem SET quantity = ? WHERE cartid = ? AND productid = ?";
+        String updateSql = "UPDATE cartitem SET quantity = ? WHERE customerid = ? AND productid = ?";
         PreparedStatement updateStmt = conn.prepareStatement(updateSql);
         updateStmt.setInt(1, newQuantity);
-        updateStmt.setInt(2, cartId);
+        updateStmt.setInt(2, customerId);
         updateStmt.setInt(3, productId);
         updateStmt.executeUpdate();
     } else {
         // Thêm mới
-        String insertSql = "INSERT INTO cartitem (cartid, productid, quantity) VALUES (?, ?, ?)";
+        String insertSql = "INSERT INTO cartitem (customerid, productid, quantity) VALUES (?, ?, ?)";
         PreparedStatement insertStmt = conn.prepareStatement(insertSql);
-        insertStmt.setInt(1, cartId);
+        insertStmt.setInt(1, customerId);
         insertStmt.setInt(2, productId);
         insertStmt.setInt(3, quantity);
         insertStmt.executeUpdate();
     }
-
-    // 3. Cập nhật tổng chi phí giỏ hàng (giản lược)
-    String updateCostSql = """
-        UPDATE cart
-        SET totalcost = (
-            SELECT SUM(p.sellprice * ci.quantity)
-            FROM cartitem ci JOIN product p ON ci.productid = p.productid
-            WHERE ci.cartid = ?
-        ),
-        finalcost = totalcost
-        WHERE cartid = ?
-    """;
-    PreparedStatement costStmt = conn.prepareStatement(updateCostSql);
-    costStmt.setInt(1, cartId);
-    costStmt.setInt(2, cartId);
-    costStmt.executeUpdate();
 
     return true;
 }
@@ -276,5 +245,113 @@ public static List<RevenueDTO> getMonthlyRevenue() throws SQLException{
     return  monthlyRevenue;
 }
 
+public static ObservableList<CartItemDTO> loadCartItems() throws SQLException {
+    ObservableList<CartItemDTO> list = FXCollections.observableArrayList();
+
+    int customerId = Session.getCurrentCustomer().getCustomerid();
+    String query = "SELECT p.productid, p.name, p.sellprice, ci.quantity " +
+                   "FROM cartitem ci " +
+                   "JOIN product p ON ci.productid = p.productid " +
+                   "WHERE ci.customerid = ?";
+
+    try (Connection conn = DatabaseConnector.connect();
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setInt(1, customerId);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            list.add(new CartItemDTO(
+                rs.getInt("productid"),
+                rs.getString("name"),
+                rs.getInt("quantity"),
+                rs.getDouble("sellprice")
+            ));
+        }
+    }
+    return list;
+    }
+    public static Voucher getVoucherByCode( String code) throws SQLException {
+        System.out.println(".()"+code);
+        String query = "SELECT * FROM voucher WHERE code = ? AND remaining > 0 AND duration >= CURRENT_DATE";
+        try (Connection conn = DatabaseConnector.connect();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, code);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            System.out.println(".()1321546");
+            Voucher voucher = new Voucher(
+                    rs.getString("code"),
+                    rs.getInt("remaining"),
+                    rs.getFloat("discount"),
+                    rs.getDate("duration").toLocalDate(),
+                    rs.getInt("voucherid")
+                );
+                System.out.println(".()1321546");
+        
+                return voucher;
+            }
+    }
+        public static int setOrder(int customerid, float  totalprice, int voucherid) {
+        String sql = "INSERT INTO orders (customerid, totalprice, voucherid) VALUES (?, ?, ?) RETURNING orderid";
+
+        try (Connection conn = connect();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, customerid);
+            preparedStatement.setFloat( 2, totalprice);
+            preparedStatement.setInt(3, voucherid);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return (int)resultSet.getInt(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+        public static boolean  setOrderline(List<CartItemDTO> cartItemDTOs, int orderId) {
+        String sql = "INSERT INTO orderline (orderid, productid, quantity, pricepurchase) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = connect()){
+            PreparedStatement insertLine = conn.prepareStatement(
+                "INSERT INTO orderline (orderid, productid, quantity, pricepurchase) VALUES (?, ?, ?, ?)");
+            for (CartItemDTO item : cartItemDTOs) {
+                insertLine.setInt(1, orderId);
+                insertLine.setInt(2, item.getProductid());
+                insertLine.setInt(3, item.getQuantity());
+                insertLine.setDouble(4, item.getSellprice());
+                insertLine.addBatch();
+            }
+            insertLine.executeBatch();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+        public static boolean  deleteCartItem(int customerid, List<CartItemDTO> cartItemDTOs) {
+        String sql = "INSERT INTO orderline (orderid, productid, quantity, pricepurchase) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = connect()){
+            PreparedStatement insertLine = conn.prepareStatement(
+                "INSERT INTO orderline (orderid, productid, quantity, pricepurchase) VALUES (?, ?, ?, ?)");
+                for (CartItemDTO item : cartItemDTOs) {
+                PreparedStatement del = conn.prepareStatement(
+                    "DELETE FROM cartitem WHERE customerid = ? AND productid = ?");
+                del.setInt(1, customerid);
+                del.setInt(2, item.getProductid());
+                del.executeUpdate();
+            }
+            insertLine.executeBatch();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

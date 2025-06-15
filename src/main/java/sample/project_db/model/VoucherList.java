@@ -1,11 +1,15 @@
 package sample.project_db.model;
 
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.sql.*;
-import java.time.LocalDate;
 
 public class VoucherList {
 
@@ -55,7 +59,7 @@ public class VoucherList {
 
     public ObservableList<Voucher> getAllVouchers() {
         ObservableList<Voucher> voucherList = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM voucher";
+        String sql = "SELECT * FROM all_vouchers";
 
         try (PreparedStatement prepare = connect.prepareStatement(sql);
              ResultSet result = prepare.executeQuery()) {

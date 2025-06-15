@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class Product {
     private Integer productid;
     private String name;
-    private String image;
     private String distributor;
     private String desscription;
     private LocalDate addeddate;
@@ -17,15 +16,14 @@ public class Product {
     private String author;
     private LocalDate publishdate;
     private int categoryid;
-    
+    private boolean isdeleted;
     public Product() {
     }
-    public Product(Integer productid, String name, String image, String distributor, String desscription,
+    public Product(Integer productid, String name, String distributor, String desscription,
             LocalDate   addeddate, int quantity, double  importprice, double  sellprice, int age, String isbn, String author,
             LocalDate publishdate, int categoryid) {
         this.productid = productid;
         this.name = name;
-        this.image = image;
         this.distributor = distributor;
         this.desscription = desscription;
         this.addeddate = addeddate;
@@ -37,6 +35,7 @@ public class Product {
         this.author = author;
         this.publishdate = publishdate;
         this.categoryid = categoryid;
+        this.isdeleted = false;
     }
     public Product(String name, int quantity, double  sellprice) {
         this.name=name;
@@ -58,14 +57,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getDistributor() {

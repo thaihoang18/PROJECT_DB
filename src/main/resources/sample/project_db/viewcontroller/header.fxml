@@ -13,6 +13,7 @@
     <Label text="📚 Bookstore" style="-fx-font-size: 18px;"/>
     <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
     <Button text="Trang chủ" onAction="#goHome"/>
+    <Button text="Cart" onAction="#goCart"/>
     <Button text="Hồ sơ" onAction="#goProfile"/>
     <Button text="Login" onAction="#goLogin"/>
     <Button text="Store" onAction="#goStore"/>

@@ -16,7 +16,24 @@ END;
 $$ LANGUAGE plpgsql;
 
 
--- signup
+-- customer signup
+
+CREATE OR REPLACE FUNCTION customer_signup(eusername TEXT, epassword TEXT, equestion TEXT, eanswer TEXT, ename TEXT, eemail TEXT, eaddress TEXT)
+RETURNS BOOLEAN AS $$
+DECLARE
+    count_customerusername INT;
+BEGIN
+    SELECT COUNT(*) INTO count_customerusername FROM customer WHERE customerusername = eusername;
+    IF count_customerusername > 0 THEN
+        RETURN FALSE;
+    END IF;
+
+    INSERT INTO customer(customerusername, customerpassword, question, answer, customername, phonenumber, email, address) VALUES (eusername, epassword, equestion, eanswer , ename , eemail , eaddress );
+    RETURN TRUE;
+END;
+$$ LANGUAGE plpgsql;
+
+-- admin signup
 CREATE OR REPLACE FUNCTION admin_signup(eusername TEXT, epassword TEXT, equestion TEXT, eanswer TEXT)
 RETURNS BOOLEAN AS $$
 DECLARE
@@ -33,6 +50,21 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+-- customer login
+CREATE OR REPLACE FUNCTION admin_login(eusername TEXT, epassword TEXT)
+RETURNS BOOLEAN AS $$
+DECLARE
+    count_admin INT;
+BEGIN
+    SELECT COUNT(*) INTO count_admin FROM admin 
+    WHERE adminusername = eusername AND adminpassword = epassword ;
+    IF count_admin > 0 THEN
+        RETURN TRUE;
+    END IF;
+    RETURN FALSE;
+END;
+$$ LANGUAGE plpgsql;
+
 -- admin login
 CREATE OR REPLACE FUNCTION admin_login(eusername TEXT, epassword TEXT)
 RETURNS BOOLEAN AS $$
@@ -40,7 +72,7 @@ DECLARE
     count_admin INT;
 BEGIN
     SELECT COUNT(*) INTO count_admin FROM admin 
-    WHERE adminusername = eusername AND adminpassword = epassword;
+    WHERE adminusername = eusername AND adminpassword = epassword ;
     IF count_admin > 0 THEN
         RETURN TRUE;
     END IF;

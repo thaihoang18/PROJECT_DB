@@ -24,6 +24,7 @@ public class Session {
     }
     public Session() {
     }
+
     public static void logout(){
         currentAdmin=null;
         currentCustomer=null;

@@ -10,8 +10,9 @@ import javafx.scene.control.Label;
 import sample.project_db.model.Order;
 import sample.project_db.model.Orderline;
 import sample.project_db.utils.hoang.OrderHistoryDAO;
-import java.util.List;
+
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class OrderHistoryController {
 
@@ -44,28 +45,20 @@ public class OrderHistoryController {
             return null;
         });
         orderlineIdColumn.setCellValueFactory(cellData -> {
-            if (cellData.getValue() instanceof Orderline) {
-                return new ReadOnlyObjectWrapper<>(((Orderline) cellData.getValue()).getOrderlineid());
-            }
-            return null;
+            Orderline orderline = findFirstOrderlineForOrder(cellData.getValue());
+            return orderline != null ? new ReadOnlyObjectWrapper<>(orderline.getOrderlineid()) : null;
         });
         productIdColumn.setCellValueFactory(cellData -> {
-            if (cellData.getValue() instanceof Orderline) {
-                return new ReadOnlyObjectWrapper<>(((Orderline) cellData.getValue()).getProductid());
-            }
-            return null;
+            Orderline orderline = findFirstOrderlineForOrder(cellData.getValue());
+            return orderline != null ? new ReadOnlyObjectWrapper<>(orderline.getProductid()) : null;
         });
         quantityColumn.setCellValueFactory(cellData -> {
-            if (cellData.getValue() instanceof Orderline) {
-                return new ReadOnlyObjectWrapper<>(((Orderline) cellData.getValue()).getQuantity());
-            }
-            return null;
+            Orderline orderline = findFirstOrderlineForOrder(cellData.getValue());
+            return orderline != null ? new ReadOnlyObjectWrapper<>(orderline.getQuantity()) : null;
         });
         pricePurchaseColumn.setCellValueFactory(cellData -> {
-            if (cellData.getValue() instanceof Orderline) {
-                return new ReadOnlyObjectWrapper<>(((Orderline) cellData.getValue()).getPricepurchase());
-            }
-            return null;
+            Orderline orderline = findFirstOrderlineForOrder(cellData.getValue());
+            return orderline != null ? new ReadOnlyObjectWrapper<>(orderline.getPricepurchase()) : null;
         });
         purchaseDateColumn.setCellValueFactory(cellData -> {
             if (cellData.getValue() instanceof Order) {
@@ -83,13 +76,42 @@ public class OrderHistoryController {
 
         // Lấy dữ liệu từ DAO
         OrderHistoryDAO orderHistoryDAO = new OrderHistoryDAO();
-        int customerId = CustomerLoginController.getLoggedInCustomerId(); // Sửa lại tên Controller
+        int customerId = CustomerLoginController.getLoggedInCustomerId();
         List<Object> orderHistory = orderHistoryDAO.getOrderHistoryByCustomerId(customerId);
         ObservableList<Object> observableOrderHistory = FXCollections.observableArrayList(orderHistory);
-        orderTable.setItems(observableOrderHistory);
+
+        // Lọc bỏ các phần tử không cần thiết (nếu có)
+        ObservableList<Object> filteredOrderHistory = FXCollections.observableArrayList();
+        for (Object item : observableOrderHistory) {
+            if (item instanceof Order || (item instanceof Orderline && !filteredOrderHistory.isEmpty() && filteredOrderHistory.get(filteredOrderHistory.size() - 1) instanceof Order)) {
+                filteredOrderHistory.add(item);
+            }
+        }
+
+        // Đảm bảo dữ liệu được gán đúng
+        if (filteredOrderHistory.isEmpty()) {
+            System.out.println("No order history found for customer ID: " + customerId);
+        }
+        orderTable.setItems(filteredOrderHistory);
 
         // Hiển thị tổng số lần giao dịch
         int totalTransactions = orderHistoryDAO.getTotalTransactions(customerId);
         totalTransactionsLabel.setText("Total Transactions: " + totalTransactions);
+    }
+
+    private Orderline findFirstOrderlineForOrder(Object item) {
+        if (item instanceof Order) {
+            int orderId = ((Order) item).getOrderid();
+            // Tìm Orderline đầu tiên trong danh sách orderHistory
+            for (Object obj : orderTable.getItems()) {
+                if (obj instanceof Orderline) {
+                    Orderline orderline = (Orderline) obj;
+                    if (orderline.getOrderid() == orderId) {
+                        return orderline;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }
